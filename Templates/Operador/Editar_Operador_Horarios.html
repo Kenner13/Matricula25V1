@@ -1,0 +1,46 @@
+{% extends "Base_Operador.html" %}
+{% block title %}Módulo Operador | Horarios{% endblock %}
+
+{% block header %}
+<h2>Panel del Operador</h2>
+{% endblock %}
+
+{% block content %}
+
+<div class="contenedor">
+    <form method="POST">
+        {% csrf_token %}
+        
+        <label for="D_DiaApertura">Día de Apertura:</label>
+        <input type="date" name="D_DiaApertura" value="{{ form.D_DiaApertura.value|date:"Y-m-d" }}" required>
+
+        <label for="D_HoraApertura">Hora de Apertura:</label>
+        <input type="time" name="D_HoraApertura" value="{{ form.D_HoraApertura.value }}" required>
+
+        <label for="D_DiaCierre">Día de Cierre:</label>
+        <input type="date" name="D_DiaCierre" value="{{ form.D_DiaCierre.value|date:"Y-m-d" }}" required>
+
+        <label for="D_HoraCierre">Hora de Cierre:</label>
+        <input type="time" name="D_HoraCierre" value="{{ form.D_HoraCierre.value }}" required>
+
+        <!-- Campo para seleccionar la categoría -->
+        <label for="T_Categoria">Categoría:</label>
+        <select name="T_Categoria" required>
+            <option value="quinto_superior" {% if form.T_Categoria.value == "quinto_superior" %}selected{% endif %}>Quinto Superior</option>
+            <option value="regulares_invictos" {% if form.T_Categoria.value == "regulares_invictos" %}selected{% endif %}>Regulares Invictos</option>
+            <option value="todos" {% if form.T_Categoria.value == "todos" %}selected{% endif %}>Todos</option>
+        </select>
+        <br><br>
+        <label for="contrasena">Clave de Administrador:</label>
+        <input type="password" name="contrasena" required>
+        <br><br>
+            
+
+        <button type="submit" onclick="alertaGuardar()">Guardar cambios</button>
+    </form>
+</div>
+
+    {% block extra_js %}
+        <script src="/static/JS/Operador_Horarios.js"></script>
+    {% endblock %}
+{% endblock %}

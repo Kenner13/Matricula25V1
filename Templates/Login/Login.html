@@ -1,0 +1,33 @@
+{% extends "Base_Login.html" %}
+
+{% block content %}
+    <div class="login-box">
+        <form method="POST">
+            
+            <h3>Iniciar Sesión</h3>
+            {% csrf_token %}
+            <div>
+                <label for="T_NombreUsuario">Nombre de Usuario:</label>
+                <div style="display: flex; margin-bottom: 0;">
+                    <span class="material-icons-sharp" style="font-size: 30px;">person_outline</span>&nbsp;
+                    <input type="text" id="T_NombreUsuario" name="T_NombreUsuario" required>
+                </div>
+            </div>
+            
+            <div>
+                <label for="T_Contrasenia">Contraseña:</label>
+                <div style="display: flex; margin-bottom: 0;">
+                    <span class="material-icons-sharp" style="font-size: 30px;">lock_outline</span>&nbsp;
+                    <input type="password" id="T_Contrasenia" name="T_Contrasenia" required>
+                </div>
+            </div>
+            <button type="submit">Iniciar sesión</button>
+        </form>
+        <br>
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    
+{% endblock %}
+

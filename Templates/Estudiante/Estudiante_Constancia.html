@@ -1,0 +1,48 @@
+{% extends "Base_Estudiante.html" %}
+
+{% block content %}
+<br><br>
+    <h1>ASIGNATURAS MATRICULADAS</h1>
+    <br><br>
+    <table class="table-matricula">
+        <thead>
+            <tr>
+                <th>Periodo</th>
+                <th>Código Asignatura</th>
+                <th>Turno</th>
+                <th>Sección</th>    
+                <th>Condición</th>
+                <th>Asignatura</th>
+                <th>Créditos</th>
+                <th>Aula</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for programacion in programaciones %}
+            <tr>
+                <td>{{ programacion.periodo }}</td>
+                <td>{{ programacion.codigo_asignatura }}</td>
+                <td>{{ programacion.turno }}</td>
+                <td>{{ programacion.seccion }}</td>
+                <td>{{ programacion.condicion}}</td>
+                <td>{{ programacion.asignatura }}</td>
+                <td>{{ programacion.creditos }}</td>
+                <td>{{ programacion.aula }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <h3>Créditos por Periodo</h3>
+    <ul>
+        {% for periodo, suma_creditos in suma_creditos_por_periodo.items %}
+        <li><strong>Periodo {{ periodo }}:</strong> {{ suma_creditos }} créditos</li>
+        {% endfor %}
+    </ul>
+    <br>
+    <p>Fecha de Emisión: {{ fecha_matricula }}</p>
+    <br>
+
+    <a href="{% url 'estudiante_constancia_pdf' %}" target="_blank" class="btn-pago">Descargar Constancia en PDF</a>
+
+{% endblock %}

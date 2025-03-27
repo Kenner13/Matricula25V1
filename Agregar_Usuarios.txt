@@ -1,0 +1,24 @@
+#AGREGAR USUARIOS POR EL SHELL
+
+python manage.py shell
+
+from TC.models import UsuarioRoles
+from TR.models import Usuario
+
+from django.contrib.auth.hashers import make_password
+rol = UsuarioRoles.objects.get(I_RolID=2)
+usuario = Usuario(
+    T_NombreUsuario='Operador@unfv.edu.pe',
+    T_Contrasenia='unfv',
+    T_ApelPaterno='OPERADOR',
+    T_ApelMaterno='ADMIN DE',
+    T_Nombre='ECONOMÍA',
+    I_RolID=rol, 
+    B_Habilitado=True,
+    D_DateInsert='2025-01-20',
+    D_DateUpDate='2025-01-20',
+    I_UsuarioID_1=1
+)
+
+usuario.T_Contrasenia = make_password(usuario.T_Contrasenia)
+usuario.save()

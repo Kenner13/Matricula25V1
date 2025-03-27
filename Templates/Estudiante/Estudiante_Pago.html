@@ -1,0 +1,23 @@
+{% extends "Base_Estudiante.html" %}
+
+{% block content %}
+<br><br>
+<br><br>
+    <!-- Mostrar datos de pago -->
+    <h1>DATOS DE SU PAGO DE MATRÍCULA</h1>
+    <br><br>
+    <div class="pago-box">
+        {% if entidad_pago and codigo_liquidacion and fecha_pago %}
+            <p><strong>Entidad Recaudadora:</strong> <a>{{ entidad_pago }}</a></p>
+            <p><strong>Código de Liquidación:</strong> <a>{{ codigo_liquidacion }}</a></p>
+            <p><strong>Fecha de Pago:</strong> <a>{{ fecha_pago }}</a></p>
+        {% endif %}
+    </div>
+    <br>
+        <a href="{% url 'estudiante_matricula' %}" class="btn-pago">Continuar</a>
+
+    {% block extra_js %}
+        <script src="/static/JS/Estudiante_Pago.js"></script>
+    {% endblock %}    
+{% endblock %}
+

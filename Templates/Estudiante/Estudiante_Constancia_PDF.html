@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Constancia de Matrícula</title>
+    <style>
+        h1, h2, h3 { text-align: center; color: #000; font-weight: bold; }
+        h1 {
+            font-size: 25px;
+        }
+        h2 {
+            font-size: 20px;
+        }
+        h3 {
+            font-size: 16px;
+        }
+        p { font-size: 12px; color: #333; text-align: center; }
+        strong { color: #000; }
+
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #000; padding: 3px; }
+        th { background-color: #2c3e50; color: #ffffff; }
+
+        /* Salto de página para cada periodo */
+        .page-break { page-break-before: always; }
+
+        @page { size: A4; margin: 1.5cm; }
+        footer { font-size: 12px; position: fixed; bottom: 30px; width: 100%; }
+    </style>
+</head>
+<body>
+
+    {% for p in periodos %}
+
+    {% if not forloop.first %}
+        <div style="page-break-before: always;"></div>
+    {% endif %}
+    <img src="C:/inetpub/wwwroot/Piloto/static/images/logo.png" style="width: 150px; height: 55px;">
+    &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+    &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+    &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+    &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+    &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+    &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+    &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+    <img src="C:/inetpub/wwwroot/Piloto/static/images/fce.png" style="width: 150px; height: 52px;">
+
+    <header>
+        <h1>UNIVERSIDAD NACIONAL FEDERICO VILLARREAL</h1>
+        <h2>CONSTANCIA DE MATRÍCULA 2025</h2>
+        <h3>{{ nombre_estudiante }}</h3>
+    </header>
+
+    <main>
+        <section>
+            <p><strong>Código Estudiante:</strong> {{ codigo_estudiante }}</p>
+            <p><strong>Facultad:</strong> {{ facultad }} &nbsp; &nbsp; <strong>Escuela:</strong> {{ escuela }} &nbsp; &nbsp; <strong>Especialidad:</strong> {{ especialidad }}</p>
+            <p><strong>Año de Ingreso:</strong> {{ anio_ingreso }} &nbsp; &nbsp; <strong>Plan de Estudio:</strong> {{ plan_estudio }} &nbsp; &nbsp; <strong>Nivel:</strong> {{ nivel }}</p>
+        </section>
+
+        <section>
+            <h3>ASIGNATURAS MATRICULADAS 2025-{{ p }}</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">Período</th>
+                        <th style="width: 50px;">Ciclo</th>
+                        <th style="width: 80px;">Código Asignatura</th>
+                        <th style="width: 50px;">Turno</th>
+                        <th style="width: 50px;">Sección</th>
+                        <th style="width: 100px;">Condición</th>
+                        <th style="width: 300px;">Asignatura</th>
+                        <th style="width: 55px;">Créditos</th>
+                        <th style="width: 45px;">Vez</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for programacion in programaciones %}
+                        {% if programacion.periodo == p %}
+                            <tr>
+                                <td style="text-align: center;">{{ programacion.periodo }}</td>
+                                <td style="text-align: center;">{{ programacion.ciclo }}</td>
+                                <td style="text-align: center;">{{ programacion.codigo_asignatura }}</td>
+                                <td style="text-align: center;">{{ programacion.turno }}</td>
+                                <td style="text-align: center;">{{ programacion.seccion }}</td>
+                                <td style="text-align: center;">{{ programacion.condicion }}</td>
+                                <td>{{ programacion.asignatura }}</td>
+                                <td style="text-align: center;">{{ programacion.creditos }}</td>
+                                <td style="text-align: center;">{{ programacion.vez_llevado }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            {% for item in suma_creditos_lista %}
+                {% if item.periodo == p %}
+                    <p><strong>Total Créditos 2025-{{ p }}:</strong> {{ item.creditos }}</p>
+                {% endif %}
+            {% endfor %}
+        </section>
+
+        <strong>Código de Liquidación: {{ liquidacion|join:", " }}</strong>
+        <br>
+        <strong>Fecha de Pago: {{ fecha_pago|join:", " }}</strong>
+        <br><br>
+        <p>-----------------------------------------------<br>Sello de la Facultad de Ciencias Económicas</p>
+        <p>Fecha de emisión: {{ fecha_matricula }}</p>
+
+        <p style="text-align: right;">
+            Página <pdf:pagenumber> de <pdf:pagecount> | N°: {{ identificador }}
+        </p>
+
+    </main>
+
+{% endfor %}
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+python manage.py shell
+
+from TR.models import Usuario 
+from django.contrib.auth.hashers import make_password
+
+# Obtener todos los usuarios
+usuarios = Usuario.objects.all()
+
+# Iterar sobre los usuarios y actualizar la contraseña con el hash adecuado
+for usuario in usuarios:
+    if usuario.T_Contrasenia != '':  
+        nueva_contraseña_hash = make_password(usuario.T_Contrasenia)  
+        usuario.T_Contrasenia = nueva_contraseña_hash 
+        usuario.save()

@@ -1,0 +1,90 @@
+{% extends "Base_Operador.html" %}
+{% block title %}Módulo Operador | Asignaturas{% endblock %}
+
+{% block content %}
+<h1>PROGRAMACIÓN DE ASIGNATURAS - {{ especialidad }} </h1>
+<br><br>
+<a href="{% url 'crear_programacion' %}" class="btn-editar">Crear Programacion</a>
+<br><br><br>
+<div style="width: 500px;">
+    <form method="get">
+        <label for="ciclo">Filtrar por ciclo:</label>
+        <select name="ciclo" id="ciclo" style="width: 200px;">
+            <option value="">Todos los ciclos</option>
+            {% for ciclo in ciclos_disponibles %}
+                <option value="{{ ciclo.I_AsignaturaID__T_Ciclo }}" 
+                    {% if ciclo.I_AsignaturaID__T_Ciclo == ciclo_seleccionado %} selected {% endif %}>
+                    {{ ciclo.I_AsignaturaID__T_Ciclo }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit" style="background-color: #ac9b04; padding: 0.55rem 3rem;">Filtrar</button>
+        <br><br>
+    </form>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Periodo</th>
+            <th>Ciclo</th>
+            <th>Plan</th>
+            <th>Codigo</th>
+            <th>Nombre de la Asignatura</th>
+            <th>Créditos</th>
+            <th>Condición</th>
+            <th>Turno</th>
+            <th>Sección</th>
+            <th>Días</th>
+            <th>Horas</th>
+            <th>Docente</th>
+            <th>Cupos</th>
+            <th>Matriculados</th>
+            <th>Editar</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for programacion in page_obj %}
+            <tr>
+                <td>{{ programacion.periodo }}</td>
+                <td>{{ programacion.ciclo}}</td>
+                <td>{{ programacion.plan }}</td>
+                <td>{{ programacion.codigo_asignatura }}</td>
+                <td>{{ programacion.asignatura }}</td>
+                <td>{{ programacion.creditos }}</td>
+                <td>{{ programacion.condicion }}</td>
+                <td>{{ programacion.turno }}</td>
+                <td>{{ programacion.seccion }}</td>
+                <td>{{ programacion.dias }}</td>
+                <td>{{ programacion.horas }}</td>
+                <td>{{ programacion.docentes }}</td>
+                <td>{{ programacion.cupos_fijos }}</td>
+                <td>{{ programacion.matriculados}} / {{ programacion.cupos_fijos }}</td>
+                <td><a href="{% url 'editar_programacion' programacion.ID %}" class="btn-edit">Editar</a></td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="13">No hay programaciones disponibles.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+<!-- Paginación -->
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1{% if ciclo_seleccionado %}&ciclo={{ ciclo_seleccionado }}{% endif %}" class="btn-paginar">&laquo; </a>
+            <a href="?page={{ page_obj.previous_page_number }}{% if ciclo_seleccionado %}&ciclo={{ ciclo_seleccionado }}{% endif %}" class="btn-paginar">‹</a>
+        {% endif %}
+
+        <span class="current">
+            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{% if ciclo_seleccionado %}&ciclo={{ ciclo_seleccionado }}{% endif %}" class="btn-paginar">›</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}{% if ciclo_seleccionado %}&ciclo={{ ciclo_seleccionado }}{% endif %}" class="btn-paginar"> &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

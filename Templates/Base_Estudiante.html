@@ -1,0 +1,43 @@
+<!-- Base_Estudiante.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sistema de Matrícula{% endblock %}</title>
+    <link rel="stylesheet" href="/static/CSS/Base_Estudiante.css">
+    <link rel="icon" type="image" href="/static/assets/favicon.ico"/>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <h1>UNFV</h1>
+        <a href="{% url 'logout' %}" class="btn-logout">
+            <h3>Cerrar Sesión</h3>
+        </a>
+    </header>
+    <main>
+        <div class="header-actions">
+            <h2>Sistema de Matrícula</h2>
+        </div>
+            <br><br>
+            <!-- Mostrar datos del estudiante -->
+            <h1>{{nombre_estudiante}}</h1>
+            <h1>{{ codigo_estudiante }}</h1>
+            <p><strong>Facultad:</strong> {{ facultad }}</p>
+            <p><strong>Escuela:</strong> {{ escuela }}</p>
+            <p><strong>Especialidad:</strong> {{ especialidad }}</p>
+            <p><strong>Base:</strong> {{ anio_ingreso }}</p>
+            <br>
+            <p><strong>Plan de Estudio:</strong> {{ plan_estudio }}</p>
+            <p><strong>Último Semestre Cursado:</strong> {{ ultimo_semestre }}</p> 
+            
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p style="font-weight: bold;">CONTACTO DE SOPORTE TÉCNICO:  (01) 748-0888 - Anexo: 921257 - 921258  HORARIO DE ATENCIÓN: DE LUNES A VIERNES HORA: 09:00 - 13:00 | 14:00-16:30  CORREO: Epe.fce@unfv.edu.pe</p>
+        <p>UNIVERSIDAD NACIONAL FEDERICO VILLARREAL</p>
+    </footer>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,160 @@
+{% extends "Base_Estudiante.html" %}
+
+
+
+{% block content %}
+<br><br>
+        <!-- Temporizador -->        
+        <div class="cont-temporizador">
+            <div class="bloque">
+                <div class="horas" id="horas">00</div>
+                    <p>HORAS</p>
+                
+            </div>
+            <div class="bloque">
+                <div class="minutos" id="minutos">--</div>
+                    <p>MINUTOS</p>
+                
+            </div>
+            <div class="bloque">
+                <div class="segundos" id="segundos">--</div>
+                    <p>SEGUNDOS</p>
+                
+            </div>
+
+        </div>
+        <br><br>
+        <!-- Mostrar Asignaturas disponibles -->
+        <h1>ASIGNATURAS DISPONIBLES</h1>
+        <br><br>
+            <form method="post">
+                {% csrf_token %}
+                <section>
+                    <div class="table-container">
+                    <table class="table-disponibles">
+                        <thead>
+                            <tr>
+                                <th>Periodo</th>
+                                <th>Ciclo</th>
+                                <th>Código</th>
+                                <th>Nombre de la Asignatura</th>
+                                <th>Condición</th>
+                                <th>Turno</th>
+                                <th>Sección</th>
+                                <th>Vez</th>
+                                <th>Créditos</th>
+                                <th>Días</th>
+                                <th>Horas</th>
+                                <th>Docente</th>
+                                <th>Aula</th>
+                                <th>Cupos</th>
+                                <th>Agregar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for programacion in programaciones %}
+                            <tr>
+                                <td>{{ programacion.periodo }}</td>
+                                <td>{{ programacion.ciclo }}</td>
+                                <td>{{ programacion.codigo_asignatura }}</td>
+                                <td>{{ programacion.asignatura }}</td>
+                                <td>{{ programacion.condicion }}</td>
+                                <td>{{ programacion.turno }}</td>
+                                <td>{{ programacion.seccion }}</td>
+                                <td>{{ programacion.vez_llevado}}</td>
+                                <td>{{ programacion.creditos }}</td>
+                                <td>{{ programacion.dias }}</td>
+                                <td>{{ programacion.horas }}</td>
+                                <td>{{ programacion.docentes }}</td>
+                                <td>{{ programacion.aula }}</td>
+                                <td>{{ programacion.cupos }}</td>
+                                <td>
+                                    <button type="button" class="btn-primary" style="background-color: #4CAF50; color: white; border-radius: 4px; padding: 6px 14px; font-size: 16px; border: none; cursor: pointer;"
+                                        onclick="agregarAsignatura( 
+                                                    '{{ programacion.ID }}',
+                                                    '{{ programacion.periodo }}',
+                                                    '{{ programacion.codigo_asignatura }}',
+                                                    '{{ programacion.ciclo }}',
+                                                    '{{ programacion.asignatura }}', 
+                                                    '{{ programacion.condicion }}',
+                                                    '{{ programacion.turno }}',
+                                                    '{{ programacion.seccion }}',
+                                                    '{{ programacion.vez_llevado}}',
+                                                    '{{ programacion.creditos }}',
+                                                    '{{ programacion.dias }}',
+                                                    '{{ programacion.horas }}',
+                                                    '{{ programacion.docentes }}',
+                                                    '{{ programacion.aula }}')">
+                                        <span style="font-size: 20px;">+</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                </section>
+                
+            </form>
+           
+            <!-- Mostrar Asignaturas seleccionadas -->
+            <br><br>
+            <h1>ASIGNATURAS SELECCIONADAS</h1>
+            <br><br>
+            
+            
+            <form method="POST">
+                {% csrf_token %}
+                <div class="table-box">
+                <input type="hidden" id="programaciones_seleccionadas" name="programaciones_seleccionadas" value="">
+                <section>
+                    <table id="tabla_seleccionadas" class="table-seleccionadas" style="display:none;">
+                        <thead>
+                            <tr>
+                                <th>Periodo</th>
+                                <th>Ciclo</th>
+                                <th>Código</th>
+                                <th>Nombre</th>
+                                <th>Condición</th>
+                                <th>Turno</th>
+                                <th>Seccion</th>
+                                <th>Vez</th>
+                                <th>Créditos</th>
+                                <th>Días</th>
+                                <th>Horas</th>
+                                <th>Docente</th>
+                                <th>Aula</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla_asignaturas_seleccionadas_body"></tbody>
+                    </table>
+                </section>
+            </div>
+            <br><br>
+            <h4><span>Créditos Periodo I: </span><span id="creditosI">0</span></h4>
+            <h4><span>Créditos Periodo II: </span><span id="creditosII">0</span></h4>
+            <br><br>
+                <button class="registrar-button" type="submit" 
+                onclick="filtrarBotonRegistrar(
+
+                )">Registrar Matrícula</button>
+            </form>
+        
+        <br><br>
+        {% if errores %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for error in errores %}
+                    {{ error }}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+              
+    {% block extra_js %}
+        <script src="/static/JS/Estudiante_Matricula.js"></script>
+        <script src="/static/JS/Estudiante_Matricula_Temporizador.js"></script>
+    {% endblock %}
+   
+{% endblock %}

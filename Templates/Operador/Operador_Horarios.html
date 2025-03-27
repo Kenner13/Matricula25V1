@@ -1,0 +1,81 @@
+{% extends "Base_Operador.html" %}
+
+{% block title %}Módulo Operador | Horarios{% endblock %}
+
+{% block header %}
+<h2>Panel del Operador</h2>
+{% endblock %}
+
+{% block content %}
+<!-- Mostrar el formulario para crear horario -->
+<h4>AGREGAR NUEVO HORARIO</h4>
+<br>
+<div class="contenedor" action="{% url 'operador_horarios' %}">
+    <form method="POST">
+        {% csrf_token %}
+        
+        <label for="D_DiaApertura">Día de Apertura:</label>
+        <input type="date" name="D_DiaApertura" value="{{ form.D_DiaApertura.value|date:"Y-m-d" }}" required>
+
+        <label for="D_HoraApertura">Hora de Apertura:</label>
+        <input type="time" name="D_HoraApertura" value="{% if form.D_HoraApertura.value %}{{ form.D_HoraApertura.value }}{% else %}00:00{% endif %}" required>
+
+        <label for="D_DiaCierre">Día de Cierre:</label>
+        <input type="date" name="D_DiaCierre" value="{{ form.D_DiaCierre.value|date:"Y-m-d" }}" required>
+
+        <label for="D_HoraCierre">Hora de Cierre:</label>
+        <input type="time" name="D_HoraCierre" value="{% if form.D_HoraCierre.value %}{{ form.D_HoraCierre.value }}{% else %}00:00{% endif %}" required>
+
+        <label for="T_Categoria">Categoría:</label>
+        <select name="T_Categoria" required>
+            <option value="" {% if not form.T_Categoria.value %}selected{% endif %}>Seleccione una categoría</option>
+            <option value="quinto_superior" {% if form.T_Categoria.value == "quinto_superior" %}selected{% endif %}>QUINTO SUPERIOR</option>
+            <option value="regulares_invictos" {% if form.T_Categoria.value == "regulares_invictos" %}selected{% endif %}>REGULARES INVICTOS</option>
+            <option value="todos" {% if form.T_Categoria.value == "todos" %}selected{% endif %}>TODOS</option>
+        </select>
+        <br><br><br>
+        <button type="submit" onclick="alertaGuardar()">Guardar cambios</button>
+    </form>
+</div>
+
+<!-- Mostrar los horarios agregados -->
+<br><br><br>
+<h4>Horarios Agregados</h4>
+<br>
+{% if horarios %}
+    <div class="contenedor-tab">
+        <table>
+            <thead>
+                <tr>
+                    <th>Día de Apertura</th>
+                    <th>Hora de Apertura</th>
+                    <th>Día de Cierre</th>
+                    <th>Hora de Cierre</th>
+                    <th>Categoría</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for horario in horarios %}
+                <tr>
+                    <td>{{ horario.D_DiaApertura }}</td>
+                    <td>{{ horario.D_HoraApertura }}</td>
+                    <td>{{ horario.D_DiaCierre }}</td>
+                    <td>{{ horario.D_HoraCierre }}</td>
+                    <td>{{ horario.get_categoria_display }}</td>
+                    <td>
+                        <a href="{% url 'editar_acceso_matriculas' acceso_id=horario.I_AccesoID %}" class="btn-editar">Editar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <p>No has agregado horarios aún.</p>
+{% endif %}
+{% block extra_js %}
+    <script src="/static/JS/Operador_Horarios.js"></script>
+{% endblock %}
+
+{% endblock %}

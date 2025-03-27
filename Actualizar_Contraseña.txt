@@ -1,0 +1,10 @@
+python manage.py shell
+from TR.models import Usuario
+from django.contrib.auth.hashers import make_password
+
+usuario = Usuario.objects.get(T_NombreUsuario ='2020102466@unfv.edu.pe')
+nueva_contrasenia = make_password('unfv')
+usuario.T_Contrasenia = nueva_contrasenia
+
+usuario.save()
+exit()

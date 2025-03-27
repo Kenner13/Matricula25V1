@@ -1,0 +1,70 @@
+2025-03-05 21:08:36,137 - WARNING - Not Found: /static/CSS/Base_Estudiante.css
+2025-03-05 21:08:36,174 - WARNING - Not Found: /static/assets/favicon.ico
+2025-03-05 21:08:52,534 - WARNING - Not Found: /static/CSS/Base_Estudiante.css
+2025-03-05 21:08:52,539 - WARNING - Not Found: /static/CSS/Base_Estudiante.css
+2025-03-05 21:08:52,661 - WARNING - Not Found: /static/assets/favicon.ico
+2025-03-05 21:09:11,579 - WARNING - Not Found: /static/CSS/Base_Estudiante.css
+2025-03-05 21:09:11,584 - WARNING - Not Found: /static/CSS/Base_Estudiante.css
+2025-03-05 21:09:11,928 - WARNING - Not Found: /static/assets/favicon.ico
+2025-03-05 21:09:23,242 - WARNING - Not Found: /static/CSS/Base_Estudiante.css
+2025-03-05 21:09:23,251 - WARNING - Not Found: /static/CSS/Base_Estudiante.css
+2025-03-05 21:09:23,383 - WARNING - Not Found: /static/assets/favicon.ico
+2025-03-05 21:14:48,917 - DEBUG - Using proactor: IocpProactor
+2025-03-07 22:52:50,877 - DEBUG - Using proactor: IocpProactor
+2025-03-07 22:53:16,423 - DEBUG - Using proactor: IocpProactor
+2025-03-08 13:53:18,067 - WARNING - Not Found: /static/CSS/Base_Estudiante.css
+2025-03-08 13:53:18,108 - WARNING - Not Found: /static/assets/favicon.ico
+2025-03-08 13:53:22,925 - WARNING - Not Found: /static/CSS/Base_Estudiante.css
+2025-03-08 13:53:22,932 - WARNING - Not Found: /static/JS/Estudiante_Terminos_Condiciones.js
+2025-03-08 13:53:42,895 - WARNING - Not Found: /testudiante_pago
+2025-03-08 13:53:42,973 - WARNING - Not Found: /favicon.ico
+2025-03-08 13:55:40,786 - INFO - C:\inetpub\wwwroot\Piloto\Estudiante_Matricula\views.py changed, reloading.
+2025-03-08 13:55:40,787 - DEBUG - Using proactor: IocpProactor
+2025-03-08 13:55:49,396 - DEBUG - Using proactor: IocpProactor
+2025-03-08 14:34:06,582 - ERROR - Internal Server Error: /estudiante_matricula/
+Traceback (most recent call last):
+  File "C:\inetpub\wwwroot\Piloto\venv\Lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\inetpub\wwwroot\Piloto\venv\Lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\inetpub\wwwroot\Piloto\venv\Lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\inetpub\wwwroot\Piloto\AppLogin\decorators.py", line 16, in _wrapped_view
+    response = func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\inetpub\wwwroot\Piloto\AppLogin\decorators.py", line 46, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\inetpub\wwwroot\Piloto\AppLogin\decorators.py", line 16, in _wrapped_view
+    response = func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\inetpub\wwwroot\Piloto\Estudiante_Matricula\views.py", line 258, in Estudiante_Matricula
+    programaciones_agrupadas_list = obtener_programaciones_estudiante(estudiante)  # Información de programación
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\inetpub\wwwroot\Piloto\Estudiante_Matricula\views.py", line 210, in obtener_programaciones_estudiante
+    asignatura = Asignatura.objects.get(I_AsignaturaID=asignatura_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\inetpub\wwwroot\Piloto\venv\Lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\inetpub\wwwroot\Piloto\venv\Lib\site-packages\django\db\models\query.py", line 415, in get
+    raise self.model.DoesNotExist(
+TR.models.Asignatura.DoesNotExist: Asignatura matching query does not exist.
+2025-03-08 14:45:59,959 - DEBUG - Using proactor: IocpProactor
+2025-03-08 14:46:20,412 - DEBUG - Using proactor: IocpProactor
+2025-03-10 11:45:46,081 - WARNING - Not Found: /static/CSS/Base_Estudiante.css
+2025-03-10 11:45:46,111 - WARNING - Not Found: /static/CSS/Base_Estudiante.css
+2025-03-10 11:45:46,226 - WARNING - Not Found: /static/assets/favicon.ico
+2025-03-10 11:45:51,641 - DEBUG - Using proactor: IocpProactor
+2025-03-11 14:46:16,290 - DEBUG - Using proactor: IocpProactor
+2025-03-11 14:46:24,290 - DEBUG - Using proactor: IocpProactor
+2025-03-12 15:28:31,638 - DEBUG - Using proactor: IocpProactor
+2025-03-12 15:28:39,951 - DEBUG - Using proactor: IocpProactor
+2025-03-12 16:37:13,258 - DEBUG - Using proactor: IocpProactor
+2025-03-12 17:10:09,585 - DEBUG - Using proactor: IocpProactor
+2025-03-12 17:10:21,100 - DEBUG - Using proactor: IocpProactor
+2025-03-12 23:21:28,526 - DEBUG - Using proactor: IocpProactor
+2025-03-12 23:21:35,995 - DEBUG - Using proactor: IocpProactor

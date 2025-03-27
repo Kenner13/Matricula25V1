@@ -1,0 +1,109 @@
+<!-- templates/home.html -->
+{% extends "Base_Operador.html" %}
+{% block title %}Módulo Operador | Consultas{% endblock %}
+{% block content %}
+<h4>CONSULTAS MATRÍCULAS</h4>
+<br>
+<div class="juntar-contenedor">
+    <div class="contenedor1">
+        <form method="get" action="{% url 'operador_consultas' %}">
+            
+                <label for="fecha_desde">Fecha Desde:</label>
+                <input type="date" id="fecha_desde" name="fecha_desde">
+            
+            
+                <label for="fecha_hasta">Fecha Hasta:</label>
+                <input type="date" id="fecha_hasta" name="fecha_hasta">
+            
+            <br><br>
+            <button type="submit">Filtrar</button>
+        </form>
+    </div>
+    <div class="contenedor1">
+        <form method="get" action="{% url 'operador_consultas' %}">
+            <label for="codigo">Código Estudiante:</label>
+            <input type="text" id="codigo" name="codigo" value="{{ codigo|default:'' }}">
+            <button type="submit">Buscar por Código</button>
+        </form>
+    </div>
+</div>
+<br><br><br>
+<h4>LISTADO ALUMNOS DE MATRICULADOS</h4>
+<br>
+{% if page_obj.object_list %}
+    <table>
+        <thead>
+            <tr>
+                <th>Identificador</th>
+                <th>Codigo</th>
+                <th>Estudiante</th>
+                <th>Facultad</th>
+                <th>Escuela</th>
+                <th>Especialidad</th>
+                <th>Quinto Superior</th>
+                <th>Fecha de Matrícula</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for matricula in page_obj.object_list %}
+                <tr>
+                    <td>{{ matricula.I_Identificador }}</td>
+                    <td>{{ matricula.N_CodEstudianteID.N_CodEstudianteID }}</td>
+                    <td>{{ matricula.N_CodEstudianteID.T_Nombre }} {{ matricula.N_CodEstudianteID.T_ApelPaterno }} {{ matricula.N_CodEstudianteID.T_ApelMaterno }}</td>
+                    <td>{{ matricula.N_CodEstudianteID.I_PlanID.I_EspecialidadID.I_EscuelaID.I_FacultadID.T_NombreFacultad }}</td>
+                    <td>{{ matricula.N_CodEstudianteID.I_PlanID.I_EspecialidadID.I_EscuelaID.T_NombreEscuela}}</td>
+                    <td>{{ matricula.N_CodEstudianteID.I_PlanID.I_EspecialidadID.T_NombreEspecialidad}}</td>
+                    <td>{{ matricula.N_CodEstudianteID.B_QuintoSuperior}}</td>
+                    <td>{{ matricula.D_FechaMatricula }}</td>
+                </tr>  
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a href="?page=1
+                {% if fecha_desde %}&fecha_desde={{ fecha_desde }}{% endif %}
+                {% if fecha_hasta %}&fecha_hasta={{ fecha_hasta }}{% endif %}
+                {% if codigo %}&codigo={{ codigo }}{% endif %}" class="btn-paginar">&laquo;</a>
+        
+            <a href="?page={{ page_obj.previous_page_number }}
+                {% if fecha_desde %}&fecha_desde={{ fecha_desde }}{% endif %}
+                {% if fecha_hasta %}&fecha_hasta={{ fecha_hasta }}{% endif %}
+                {% if codigo %}&codigo={{ codigo }}{% endif %}" class="btn-paginar">‹</a>
+        {% endif %}
+        
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+        
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}
+                {% if fecha_desde %}&fecha_desde={{ fecha_desde }}{% endif %}
+                {% if fecha_hasta %}&fecha_hasta={{ fecha_hasta }}{% endif %}
+                {% if codigo %}&codigo={{ codigo }}{% endif %}" class="btn-paginar">›</a>
+        
+            <a href="?page={{ page_obj.paginator.num_pages }}
+                {% if fecha_desde %}&fecha_desde={{ fecha_desde }}{% endif %}
+                {% if fecha_hasta %}&fecha_hasta={{ fecha_hasta }}{% endif %}
+                {% if codigo %}&codigo={{ codigo }}{% endif %}" class="btn-paginar">&raquo;</a>
+        {% endif %}        
+        </span>
+    </div>
+    <br>
+
+    <p>Total de Alumnos Matriculados: {{ page_obj.paginator.count }}</p>
+
+
+    <a href="{% url 'descargar_matricula_excel' %}{% if codigo %}?codigo={{ codigo }}{% endif %}" target="_blank">
+        <button>Descargar Registros</button>
+    </a>
+    
+
+{% else %}
+    <tr>
+        <td colspan="4">No hay matrículas registradas para esta escuela.</td>
+    </tr>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargar Usuarios CSV</title>
+</head>
+<body>
+    <h1>Cargar Usuarios desde CSV</h1>
+
+    <!-- Formulario para cargar el CSV -->
+    <form action="{% url 'cargar_usuarios_csv' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="csv_file">Selecciona el archivo CSV:</label>
+        <input type="file" name="csv_file" id="csv_file" accept=".csv" required>
+        <button type="submit">Subir archivo CSV</button>
+    </form>
+
+    <!-- Mensajes de éxito y error -->
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <h2>Generar Excel con Contraseñas Visibles</h2>
+    <!-- Botón para generar y descargar el archivo Excel -->
+    <a href="{% url 'generar_excel_contrasenas' %}" target="_blank">
+        <button>Descargar Excel con Contraseñas</button>
+    </a>
+</body>
+</html>

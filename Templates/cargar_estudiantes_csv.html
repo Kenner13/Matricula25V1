@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Cargar Estudiantes desde CSV</title>
+</head>
+<body>
+    <h1>Cargar Estudiantes desde CSV</h1>
+
+    <!-- Formulario para cargar el CSV -->
+    <form action="{% url 'cargar_estudiantes_csv' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="csv_file">Selecciona el archivo CSV:</label>
+        <input type="file" name="csv_file" id="csv_file" accept=".csv" required>
+        <button type="submit">Subir archivo CSV</button>
+    </form>
+
+    <!-- Mensajes de éxito y error -->
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

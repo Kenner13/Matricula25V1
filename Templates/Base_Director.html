@@ -1,0 +1,32 @@
+<!-- Base_Estudiante.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/CSS/Base_Director.css">
+    <link rel="icon" type="image" href="/static/assets/favicon.ico"/>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <h1>UNFV</h1>
+        <a href="{% url 'logout' %}" class="btn-logout">
+            <h3>Cerrar Sesión</h3>
+        </a>
+    </header>
+    <main>
+        <div class="header-actions">
+            <h2>Sistema de Matrícula</h2>
+        </div>
+            <br><br>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>CONTACTO DE SOPORTE TÉCNICO:  (01) 748 0888 - Anexo:163644</p>
+        <p>UNIVERSIDAD NACIONAL FEDERICO VILLARREAL</p>
+    </footer>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

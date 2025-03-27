@@ -1,0 +1,101 @@
+{% extends "Base_Operador.html" %}
+{% block title %}Módulo Operador | Asignaturas{% endblock %}
+
+{% block content %}
+<h4>EDITAR PROGRAMACIÓN DE ASIGNATURAS</h4>
+<br>
+<form method="post">
+    {% csrf_token %}
+    
+ <!-- Mostrar los campos visibles al principio -->
+    <div class="contenedor-progra">
+        <!-- Asignatura -->
+        <label for="{{ form.I_AsignaturaID.id_for_label }}">{{ form.I_AsignaturaID.label }}</label>
+        {{ form.I_AsignaturaID }}
+
+        <!-- Periodo -->
+        <label for="{{ form.C_Periodo.id_for_label }}">{{ form.C_Periodo.label }}</label>
+        {{ form.C_Periodo }}
+
+        <!-- Turno -->
+        <label for="{{ form.C_Turno.id_for_label }}">{{ form.C_Turno.label }}</label>
+        {{ form.C_Turno }}
+
+        <!-- Sección -->
+        <label for="{{ form.C_Seccion.id_for_label }}">{{ form.C_Seccion.label }}</label>
+        {{ form.C_Seccion }}
+
+        <!-- CodDocente -->
+        <label for="{{ form.N_CodDocenteID.id_for_label }}">{{ form.N_CodDocenteID.label }}</label>
+        {{ form.N_CodDocenteID }}
+        {% if form.N_CodDocenteID.errors %}
+            {% for error in form.N_CodDocenteID.errors %}
+                {{ error }}
+            {% endfor %}
+        {% endif %}
+
+        <!-- Aula -->
+        <label for="{{ form.T_Aula.id_for_label }}">{{ form.T_Aula.label }}</label>
+        {{ form.T_Aula }}
+        {% if form.T_Aula.errors %}
+            {% for error in form.T_Aula.errors %}
+                {{ error }}
+            {% endfor %}
+        {% endif %}
+
+        <!-- Cupos -->
+        
+        <label for="{{ form.I_Cupos.id_for_label }}">{{ form.I_Cupos.label }}</label>
+        {{ form.I_Cupos }}
+        {% if form.I_Cupos.errors %}
+            {% for error in form.I_Cupos.errors %}
+                {{ error }}
+            {% endfor %}
+        {% endif %}
+        
+    </div>
+    <div class="contenedor-horario">
+        <!-- Día 1 -->
+        <div id="dia1-fields">
+            <label for="{{ form.I_DiaID1.id_for_label }}">{{ form.I_DiaID1.label }}</label>
+            {{ form.I_DiaID1 }}
+            <label for="{{ form.D_HoraInicio1.id_for_label }}">{{ form.D_HoraInicio1.label }}</label>
+            {{ form.D_HoraInicio1 }}
+            <label for="{{ form.D_HoraFin1.id_for_label }}">{{ form.D_HoraFin1.label }}</label>
+            {{ form.D_HoraFin1 }}
+        </div>
+        
+        
+            <!-- Campos ocultos inicialmente: Día 2 y Día 3 -->
+            <div id="dia2-fields" style="display:none;">
+                <br>
+                <label for="{{ form.I_DiaID2.id_for_label }}">{{ form.I_DiaID2.label }}</label>
+                {{ form.I_DiaID2 }}
+                <label for="{{ form.D_HoraInicio2.id_for_label }}">{{ form.D_HoraInicio2.label }}</label>
+                {{ form.D_HoraInicio2 }}
+                <label for="{{ form.D_HoraFin2.id_for_label }}">{{ form.D_HoraFin2.label }}</label>
+                {{ form.D_HoraFin2 }}
+            </div>
+        
+
+        
+            <div id="dia3-fields" style="display:none;">
+                <br>
+                <label for="{{ form.I_DiaID3.id_for_label }}">{{ form.I_DiaID3.label }}</label>
+                {{ form.I_DiaID3 }}
+                <label for="{{ form.D_HoraInicio3.id_for_label }}">{{ form.D_HoraInicio3.label }}</label>
+                {{ form.D_HoraInicio3 }}
+                <label for="{{ form.D_HoraFin3.id_for_label }}">{{ form.D_HoraFin3.label }}</label>
+                {{ form.D_HoraFin3 }}
+            </div>
+    </div>
+
+
+<!-- Botones para agregar más días -->
+<br><br><br>
+<button type="button" id="agregarDiaBtn">Agregar Día</button>
+<button type="button" id="eliminarDiaBtn">Eliminar Día</button>     
+<button type="submit" class="btn btn-success" onclick="verificarClave(event)">Guardar programación</button>
+</form>
+<script src="/static/JS/Operador_Asignaturas.js"></script>
+{% endblock %}

@@ -1,0 +1,31 @@
+<!-- Base_Estudiante.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Iniciar Sesión{% endblock %}</title>
+    <link rel="stylesheet" href="/static/CSS/Base_Estudiante.css">
+    <link  href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="icon" type="image" href="/static/assets/favicon.ico"/>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <h1>UNFV</h1>
+        {% block header %}{% endblock %}
+    </header>
+    <main>
+        <div class="header-actions">
+            <h2>Sistema de Matrícula</h2>
+        </div>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p style="font-weight: bold;">CONTACTO DE SOPORTE TÉCNICO:  (01) 748-0888 - Anexo: 921257 - 921258  HORARIO DE ATENCIÓN: DE LUNES A VIERNES HORA: 09:00 - 13:00 | 14:00-16:30  CORREO: Epe.fce@unfv.edu.pe</p>
+        <p>UNIVERSIDAD NACIONAL FEDERICO VILLARREAL</p>
+    </footer>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
+

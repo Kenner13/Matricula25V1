@@ -1,0 +1,55 @@
+{% extends "Base_Estudiante.html" %}
+<!-- templates/terms_and_conditions.html -->
+{% block content %}
+    <br><br>
+    <h1>TÉRMINOS Y CONDICIONES</h1>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+        <div class="contenedor-terminos">
+            <p style="text-align: center; font-weight: bold;">TÉRMINOS Y CONDICIONES DE MATRÍCULA VIRTUAL 2025<br><br></p>
+                <p style="font-weight: bold;">Responsabilidad del Alumno<br></p>
+                
+                <p>El alumno es el único responsable de realizar su matrícula dentro de los plazos establecidos por la universidad.<br>
+                La elección de cursos y horarios debe ser revisada cuidadosamente antes de confirmar la matrícula.<br><br></p>
+
+                <p style="font-weight: bold;">Veracidad de la Información<br></p>
+                
+                <p>El alumno declara que los datos personales y académicos proporcionados durante el proceso de matrícula son correctos.<br>
+                Cualquier información falsa o errónea puede invalidar la matrícula.<br><br></p>
+
+                <p style="font-weight: bold;">Pago de Matrícula y Pensiones<br></p>
+                
+                <p>La matrícula solo será válida si el pago correspondiente se ha realizado en las entidades bancarias autorizadas.<br>
+                No se admitirán pagos fuera de los plazos establecidos por la universidad.<br><br></p>
+
+                <p style="font-weight: bold;">Modificación y Anulación de Matrícula<br></p>
+                
+                <p>Una vez confirmada la matrícula, los cambios o retiros de asignaturas están sujetos a las normativas vigentes de la universidad.<br>
+                En caso de anulación de matrícula, el alumno deberá gestionar la solicitud en la plataforma designada por la universidad.<br><br></p>
+
+                <p style="font-weight: bold;">Uso de la Plataforma Virtual<br></p>
+                
+                <p>Es responsabilidad del alumno acceder a la plataforma de matrícula con sus credenciales oficiales.<br>
+                La universidad no se hace responsable por inconvenientes derivados del uso indebido de la cuenta personal del alumno.<br><br></p>
+
+                <p style="font-weight: bold;">Cumplimiento de Requisitos<br></p>
+                
+                <p>El alumno debe cumplir con los prerrequisitos de cada asignatura antes de matricularse.<br>
+                La matrícula en asignaturas sin cumplir los prerrequisitos podrá ser anulada sin derecho a reclamo.<br><br></p>
+
+                <p style="font-weight: bold;">Aceptación de los Términos<br></p>
+                
+                <p>Al completar el proceso de matrícula virtual, el alumno acepta estos términos y condiciones en su totalidad.</p>
+        </div>
+        <br>
+        <div>
+            <input type="checkbox" id="accept_terms" name="accept_terms" required>
+            <label for="accept_terms" style="font-weight: bold;">Acepto los términos y condiciones</label>
+        </div>
+        <br>
+
+        <button class="btn-continuar" type="submit" id="submit_button" disabled>Continuar</button>
+    </form>
+    <script src="/static/JS/Estudiante_Terminos_Condiciones.js"></script>
+{% endblock %}
